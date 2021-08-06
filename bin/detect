@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+readonly BUILD_DIR=$1
+readonly CLEANUP_FILE=".slugcleanup"
+
+if [[ ! -f "${BUILD_DIR}/${CLEANUP_FILE}" ]]; then
+  echo "-----> The ${CLEANUP_FILE} file was not found"
+  exit 1
+fi
+
+echo "Slug cleanup"
+exit 0

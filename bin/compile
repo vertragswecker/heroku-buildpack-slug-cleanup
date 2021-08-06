@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+readonly BUILD_DIR=$1
+readonly CLEANUP_FILE=".slugcleanup"
+
+cd ${BUILD_DIR}
+
+echo "-----> Slug cleanup started"
+echo
+
+while read location; do
+  [[ -z "${location}" ]] && continue
+
+  location_items=($(echo ${location}))
+
+  if [[ -e ${location_items[0]} ]]; then
+    echo "Removing location ${location} from slug"
+    rm -rf ${location}
+  else
+    echo "Ignoring not found location ${location}"
+  fi
+done <${CLEANUP_FILE}
+
+echo
+echo "Slug cleanup finished"
