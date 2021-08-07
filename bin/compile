@@ -7,8 +7,7 @@ readonly CLEANUP_FILE=".slugcleanup"
 
 cd ${BUILD_DIR}
 
-echo "-----> Slug cleanup started"
-echo
+echo "-----> Cleaning up slug..."
 
 while read location; do
   [[ -z "${location}" ]] && continue
@@ -16,12 +15,11 @@ while read location; do
   location_items=($(echo ${location}))
 
   if [[ -e ${location_items[0]} ]]; then
-    echo "Removing location ${location} from slug"
+    echo "       Removing location ${location}"
     rm -rf ${location}
   else
-    echo "Ignoring not found location ${location}"
+    echo "       Ignoring not found location ${location}"
   fi
 done <${CLEANUP_FILE}
 
-echo
-echo "Slug cleanup finished"
+echo "       Slug cleanup completed"
